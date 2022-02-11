@@ -1,0 +1,22 @@
+building1:
+    x_init: -0.20
+    y_min: -0.6
+    z_min: 0.0
+    # z_min: -0.05
+    x_max: 0.3
+    y_max: 0.6
+    z_max: 0.4
+    nb_neighbors: 50
+    std_ratio: 2.0
+    voxel_size: 0.0015
+    icp_max_try: 5
+    icp_max_iter: 2000
+    translation_thresh: 3.95
+    rotation_thresh: 0.02
+    max_correspondence_distance: 0.02
+    both_camera_order: [1,0,2] #[2,1,0,3,4,5,6]
+    realsense_camera_order: [2,1,0,3,4,5]
+
+
+debug: False
+debug_pointcloud: False
