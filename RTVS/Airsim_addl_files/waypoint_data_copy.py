@@ -5,14 +5,14 @@ import os
 import cv2
 
 # connect to the AirSim simulator
-client = airsim.MultirotorClient(ip = "10.2.36.227")
-# client = airsim.MultirotorClient()
+# client = airsim.MultirotorClient(ip = "10.2.36.227")
+client = airsim.MultirotorClient()
 client.confirmConnection()
 client.enableApiControl(True)
 real_pos = client.simGetGroundTruthKinematics().position
 print(real_pos)
 
-client.moveToPositionAsync(int(0), int(0), int(-15), int(2)).join()
+# client.moveToPositionAsync(int(0), int(0), int(-15), int(2)).join()
 client.hoverAsync().join()
 airsim.wait_key('Press any key to takeoff')
 print("Taking off...")
@@ -38,7 +38,7 @@ while True:
 
     
     # client.rotateByYawRateAsync(90, 1).join()
-    client.moveToPositionAsync(int(pos_x), int(pos_y), int(pos_z), int(vel)).join()
+    client.moveToPositionAsync(int(pos_x), int(pos_y), int(pos_z), int(vel) ,drivetrain = airsim.DrivetrainType.ForwardOnly, yaw_mode=airsim.YawMode(False, 0)).join() #, 3e+38, drivetrain = airsim.DrivetrainType.ForwardOnly, yaw_mode=airsim.YawMode(False, 0)).join()
     client.hoverAsync().join()
     # client.rotateToYawAsync(int(angle_z),5,1).join()
 
@@ -52,11 +52,11 @@ while True:
     if(img == 'y'):
         # responses = client.simGetImages([airsim.ImageRequest("high_res", airsim.ImageType.Scene, False, False)])
         responses = client.simGetImages([
-                airsim.ImageRequest("0", airsim.ImageType.DepthVis),
+                airsim.ImageRequest("0", airsim.ImageType.DepthPerspective),
                 airsim.ImageRequest("0", airsim.ImageType.Scene)])  
         print('Retrieved images: %d' % len(responses))
         i=i+1
-        tmp_dir = os.path.join("/home/rrc/vs_airsim/vs/dfvs", "images_airsim")
+        tmp_dir = os.path.join("/scratch/shankara/IROS22_Collision_VS/RTVS/Airsim_addl_files", "images_airsim")
         print ("Saving images to %s" % tmp_dir)
         try:
             os.makedirs(tmp_dir)
