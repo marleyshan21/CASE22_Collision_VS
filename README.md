@@ -1,4 +1,4 @@
-# IROS22_Collision_VS
+# CASE22_Collision_VS
 
 https://drive.google.com/drive/folders/1z7ILMj_JhtOrDk62AHIUQbHvQLbCLFDK?usp=sharing
 USe this link:
